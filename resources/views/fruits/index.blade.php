@@ -12,27 +12,34 @@
                     <x-primary-button class=""><a href="{{ route('fruits.create')}}"> Add Fruit</a></x-primary-button>
                 </div>
 
-                <table class="table-auto border-collapse border border-black-500 m-4">
+                <table class="border-collapse border border-black-500 m-4">
                     <thead>
-                        <th class="border border-gray-300">Fruit Name</th>
-                        <th class="border border-gray-300">Category</th>
-                        <th class="border border-gray-300">Price Per Kilogram</th>
-                        <th class="border border-gray-300">Stock</th>
-                        <th class="border border-gray-300">Description</th>
-                        <th class="border border-gray-300">Availability</th>
+                        <th class="border border-black">Fruit Name</th>
+                        <th class="border border-black">Category</th>
+                        <th class="border border-black">Price Per Kilogram</th>
+                        <th class="border border-black">Stock</th>
+                        <th class="border border-black">Description</th>
+                        <th class="border border-black">Availability</th>
+                        <th class="border border-black">Action</th>
                     </thead>
                     <tbody>
                         @forelse ($fruits as $fruit)
-                            <td>{{$fruit->$id}}</td>
-                            <td>{{$fruit->$fruit_name}}</td>
-                            <td>{{$fruit->$category}}</td>
-                            <td>{{$fruit->$price_per_kg}}</td>
-                            <td>{{$fruit->$stock}}</td>
-                            <td>{{$fruit->$description}}</td>
-                            <td>{{$fruit->$availability}}</td>
+                        <tr>
+                            <td>{{$fruit->fruit_name}}</td>
+                            <td>{{$fruit->category}}</td>
+                            <td>{{$fruit->price_per_kg}}</td>
+                            <td>{{$fruit->stock}}</td>
+                            <td>{{$fruit->description}}</td>
+                            <td>{{$fruit->availability}}</td>
                             <td>
-                                <a href="{{ route}}"></a>
+                                <a href="{{ route('fruits.edit', $fruit)}}">Edit Fruit</a>
+                                <form action="{{ route('fruits.destroy', $fruit)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button>Delete</button>
+                                </form>
                             </td>
+                        </tr>
                         @empty
                             <tr>
                                 <td>No fruit found.</td>

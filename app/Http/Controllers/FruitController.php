@@ -33,12 +33,12 @@ class FruitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'fruit_name' => 'validate',
-            'category' => 'validate',
-            'price_per_kg' => 'validate',
-            'stock' => 'validate',
-            'description' => 'validate',
-            'availability' => 'validate',
+            'fruit_name' => 'required',
+            'category' => 'required',
+            'price_per_kg' => 'required',
+            'stock' => 'required',
+            'description' => 'required',
+            'availability' => 'required',
         ]);
 
         Fruit::create($request->all());
@@ -59,7 +59,10 @@ class FruitController extends Controller
      */
     public function edit(Fruit $fruit)
     {
-        return view('fruits.edit', compact('fruit'));
+        $categories = ['citrus', 'berry', 'stone fruit', 'tropical', 'pome'];
+        $availabilities = ['Available', 'Out of Stock'];
+
+        return view('fruits.edit', compact('fruit', 'categories', 'availabilities'));
     }
 
     /**
@@ -68,12 +71,12 @@ class FruitController extends Controller
     public function update(Request $request, Fruit $fruit)
     {
         $request->validate([
-            'fruit_name' => 'validate',
-            'category' => 'validate',
-            'price_per_kg' => 'validate',
-            'stock' => 'validate',
-            'description' => 'validate',
-            'availability' => 'validate',
+            'fruit_name' => 'required',
+            'category' => 'required',
+            'price_per_kg' => 'required',
+            'stock' => 'required',
+            'description' => 'required',
+            'availability' => 'required',
         ]);
 
         $fruit->update($request->all());

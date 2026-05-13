@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FruitController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +20,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::post('fruits/{fruit}/update', [FruitController::class, 'update'])->name('fruits.update.post');
     Route::resource('fruits', FruitController::class);
+
+    Route::get('/reports',            [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/export-pdf', [ReportController::class, 'exportPDF'])->name('reports.pdf');
 });
 require __DIR__ . '/auth.php';

@@ -33,7 +33,7 @@
                         <label>Availability:</label>
                         <select name="availability">
                             @foreach ($availabilities as $availability)
-                                <option value="{{$availability}}">{{$availability}}</option>
+                                <option value="{{$availability}}">{{ ucfirst($availability)}}</option>
                             @endforeach
                         </select>
 
